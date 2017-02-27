@@ -199,7 +199,11 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGFloat)itemWidth
 {
-    return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
+    // FIX: When first time load the JSQMessageViewController the bubble width increase. May not be
+    // the perfect solution, but it can be resolved by simply using UIDevice.main.bounds instead.
+    // TODO: test to confirm this issue is resolved
+    return CGRectGetWidth([[UIScreen mainScreen] bounds]) - self.sectionInset.left - self.sectionInset.right;
+    // return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
 }
 
 - (UIDynamicAnimator *)dynamicAnimator
